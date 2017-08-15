@@ -17,9 +17,9 @@ function printFullAge(years) //5.
     for (var i = 0; i < emptyArray.length; i++) // 4. 
     {
         if (emptyArray[i] >= 18)
-            trueFalse[i] = true;
+            trueFalse.push(true);
         else
-            trueFalse[i] = false;
+            trueFalse.push(false);
         //console.log('Person ' + i + ' is full age\n Age: ' + emptyArray[i]);     // 4.
     }
     return trueFalse;
