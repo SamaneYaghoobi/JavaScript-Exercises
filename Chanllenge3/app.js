@@ -1,28 +1,38 @@
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, lastDice;
 var diceDOM = document.querySelector('.dice');
 init();
 
+//click Roll Dice
 document.querySelector('.btn-roll').addEventListener('click', function () {
     if (gamePlaying) {
+        //make random number for dice
         var dice = Math.floor(Math.random() * 6) + 1;
         diceDOM.style.display = 'block';
         diceDOM.src = 'dice-' + dice + '.png';
-
+        //active player can roll dice until dice isn't 1
         if (dice !== 1) {
-            roundScore += dice;
-            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+            //check if two 6 in a row
+            if (dice === 6 && lastDice === 6) {
+                nextPlayer();
+            } else { //update Roundscore
+                roundScore += dice;
+                document.querySelector('#current-' + activePlayer).textContent = roundScore;
+                lastDice = dice;
+            }
         } else
             nextPlayer();
     }
 
 });
 
+//click Hold
 document.querySelector('.btn-hold').addEventListener('click', function () {
     if (gamePlaying) {
+        //Update active player Score
         scores[activePlayer] += roundScore;
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-
-        if (scores[activePlayer] >= 20) {
+        //check if active player win
+        if (scores[activePlayer] >= 100) {
             diceDOM.style.display = 'none';
             document.querySelector('#name-' + activePlayer).textContent = 'WINNER!';
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
@@ -36,6 +46,7 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 
 });
 
+//click New Game
 document.querySelector('.btn-new').addEventListener('click', init);
 
 function init() {
@@ -55,11 +66,13 @@ function init() {
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
     diceDOM.style.display = 'none';
+    lastDice = 0;
 
 }
 
 function nextPlayer() {
     roundScore = 0;
+    lastDice = 0;
     document.querySelector('#current-' + activePlayer).textContent = roundScore;
     activePlayer === 1 ? activePlayer = 0 : activePlayer = 1;
     document.querySelector('.player-0-panel').classList.toggle('active');
