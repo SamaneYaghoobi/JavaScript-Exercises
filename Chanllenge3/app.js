@@ -13,6 +13,8 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
         if (dice !== 1) {
             //check if two 6 in a row
             if (dice === 6 && lastDice === 6) {
+                scores[activePlayer] = 0;
+                document.querySelector('#score-' + activePlayer).textContent = '0';
                 nextPlayer();
             } else { //update Roundscore
                 roundScore += dice;
