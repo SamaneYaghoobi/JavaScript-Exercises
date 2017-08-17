@@ -1,4 +1,4 @@
-You need to know for this exercise:
+### You need to know for this exercise:
 
 1. Variables and data types
 2. Variable mutation and type coercion
