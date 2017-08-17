@@ -1,4 +1,4 @@
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, finalScore;
 var diceDOM = document.querySelector('.dice');
 init();
 
@@ -27,7 +27,9 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
         scores[activePlayer] += roundScore;
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
         //check if active player win
-        if (scores[activePlayer] >= 100) {
+        finalScore = document.querySelector('.final-score').value;
+        if (!finalScore) finalScore = 100;
+        if (scores[activePlayer] >= finalScore) {
             diceDOM.style.display = 'none';
             document.querySelector('#name-' + activePlayer).textContent = 'WINNER!';
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
@@ -61,7 +63,7 @@ function init() {
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
     diceDOM.style.display = 'none';
-
+    document.querySelector('.final-score').value = '';
 }
 
 function nextPlayer() {
