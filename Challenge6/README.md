@@ -1,6 +1,6 @@
 ### You need to know for this exercise:
 
-1. Everything is an object!
+**1. Everything is an object!**
 2. Inheritance and the prototype chain
 3. Function constructors
 4. The prototype chain in the console
